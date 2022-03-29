@@ -8,15 +8,15 @@ const app = express();
 // const itemController = require("./controllers/itemcontroller")
 
 
-const mongoURI = process.env.MONGO_URI
+const mongoURI = process.env.MONGODB_URI
 
 
 // mongoose.connect(process.env.MONGO_URI);
 // Connection Error/Success
 const db = mongoose.connection;
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGODB_URI);
 db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
-db.on("connected", () => console.log("mongo connected: ", process.env.MONGO_URI));
+db.on("connected", () => console.log("mongo connected: ", process.env.MONGODB_URI));
 db.on("disconnected", () => console.log("mongo disconnected"));
 
 app.use(morgan("short"))
