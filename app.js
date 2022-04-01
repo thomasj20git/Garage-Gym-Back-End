@@ -5,7 +5,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const app = express();
-// const itemController = require("./controllers/itemcontroller")
+const gymController = require("./controllers/gymController")
+
 
 
 const mongoURI = process.env.MONGODB_URI
@@ -24,7 +25,7 @@ app.use(cors())
 app.use(urlencoded({extended:true}));
 app.use(express.json())
 
-// app.use("/items", itemController)
+app.use("/gym", gymController)
 
 
 //both want to occupy 3000 set to 3001
