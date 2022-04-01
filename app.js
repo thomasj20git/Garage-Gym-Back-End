@@ -29,6 +29,7 @@ app.use("/gym", gymController)
 
 
 //both want to occupy 3000 set to 3001
-app.listen(3001, ()=> (
+const port = process.env.PORT || 3001
+app.listen(port, ()=> (
     console.log("app is running")
 ))
