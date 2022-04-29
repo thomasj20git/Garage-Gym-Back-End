@@ -4,8 +4,12 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const session = require("express-session");
+const jwt = require("jsonwebtoken")
 const app = express();
 const gymController = require("./controllers/gymController")
+const userController = require("./controllers/userController")
+const workoutController = require("./controllers/workoutController")
 
 
 
@@ -24,8 +28,16 @@ app.use(morgan("short"))
 app.use(cors())
 app.use(urlencoded({extended:true}));
 app.use(express.json())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.use("/gym", gymController)
+app.use("/user", userController)
+app.use("/workout", workoutController)
+
 
 
 //both want to occupy 3000 set to 3001

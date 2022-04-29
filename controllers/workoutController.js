@@ -1,19 +1,13 @@
 const express = require("express");
-const Gym = require("../models/gymmodel");
+const Workout = require("../models/workout");
 const router = express();
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 
 router.get("/", async (req, res)=>{
-    const token = req.headers['x-access-token']
-    // const decoded = jwt.verify(token, 'Secret123')
-    // const email = decoded.email
-    // const user = await User.findOne({email: email})
     try{
-        const gymPictures = await Gym.find();
+        const workout = await Workout.find();
         res.send({
             success: true,
-            data: gymPictures
+            data: workout
         })
 
     }catch(err){
@@ -25,10 +19,10 @@ router.get("/", async (req, res)=>{
 })
 router.post("/", async(req, res)=>{
     try{
-        const newGymPictures = await Gym.create(req.body);
+        const newWorkout = await Workout.create(req.body);
         res.send({
             success:true,
-            data: newGymPictures
+            data: newWorkout
         })
 
     }catch(err){
@@ -41,13 +35,13 @@ router.post("/", async(req, res)=>{
 })
 router.get("/:id", async (req, res)=>{
     try{
-        const gymPicture = await Gym.findById(req.params.id);
-        if(!item){
+        const workout = await Workout.findById(req.params.id);
+        if(!workout){
             throw new Error("No item by that id here")
         }
         res.send({
             success: true,
-            data: gymPicture
+            data: workout
         })
     }catch(err){
         console.log(err)
@@ -60,10 +54,10 @@ router.get("/:id", async (req, res)=>{
 })
 router.delete("/:id", async (req, res)=>{
     try{
-        const gymPicture = await Gym.findByIdAndDelete(req.params.id);
+        const workout = await Workout.findByIdAndDelete(req.params.id);
         res.send({
             success: true,
-            data: gymPicture
+            data: workout
         })
     }catch(err){
         res.send({
@@ -75,10 +69,10 @@ router.delete("/:id", async (req, res)=>{
 })
 router.put("/:id", async (req, res)=>{
     try{
-        const gymPicture = await Gym.findByIdAndUpdate(req.params.id, req.body, {new: true });
+        const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, {new: true });
         res.send({
             success: true,
-            data: gymPicture
+            data: workout
         })
     }catch(err){
         res.send({
